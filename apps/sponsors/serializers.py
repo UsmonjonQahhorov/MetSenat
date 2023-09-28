@@ -1,8 +1,7 @@
+from apps.sponsors.choices import SponsorType
+from apps.sponsors.models import Sponsor
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
-from sponsors.choices import SponsorType
-from sponsors.models import Sponsor
 
 
 class SponsorSerializer(serializers.ModelSerializer):

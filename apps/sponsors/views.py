@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
-from sponsors.models import Sponsor
-from sponsors.permissions import SponsorPermission
-from sponsors.serializers import (
+from apps.sponsors.models import Sponsor
+from apps.sponsors.permissions import SponsorPermission
+from apps.sponsors.serializers import (
     SponsorSerializer,
     SponsorCreateSerializer,
     SponsorUpdateSerializer,

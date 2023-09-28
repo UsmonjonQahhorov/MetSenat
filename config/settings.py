@@ -38,13 +38,14 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = [
+    'drf_spectacular',
     'rest_framework',
     'rest_framework_simplejwt',
-    'drf_spectacular',
 ]
 PROJECT_APPS = [
-    'core',
-    'sponsors',
+    'apps.core',
+    'apps.sponsors',
+    'apps.students',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -140,6 +141,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
 }
 
 SPECTACULAR_SETTINGS = {
@@ -147,4 +150,5 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API endpoints for Metsenat Project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    # 'SCHEMA_PATH_PREFIX': 'api/'
 }

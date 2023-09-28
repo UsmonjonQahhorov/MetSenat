@@ -1,6 +1,6 @@
-from core.models import TimeStampedModel
+from apps.core.models import TimeStampedModel
 from django.db import models
-from sponsors.choices import (
+from apps.sponsors.choices import (
     SponsorType,
     SponsorStatus,
     SponsorPaymentType
