@@ -3,7 +3,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
 # Distribution / packaging
 .Python
 build/
@@ -246,3 +248,4 @@ webpack-stats.json
 
 node_modules
 .idea/
+.env

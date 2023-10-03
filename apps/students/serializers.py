@@ -1,8 +1,7 @@
+from apps.students.models import Student, StudentSponsor
 from django.db.models import Sum
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
-from apps.students.models import Student, StudentSponsor
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -55,6 +54,7 @@ class NestedStudentSponsorSerializer(serializers.ModelSerializer):
 
 class StudentDetailSerializer(serializers.ModelSerializer):
     sponsors = serializers.SerializerMethodField("get_sponsors")
+    allocated_amount = serializers.SerializerMethodField("get_allocated_amount")
 
     class Meta:
         model = Student
@@ -64,6 +64,10 @@ class StudentDetailSerializer(serializers.ModelSerializer):
         queryset = StudentSponsor.objects.filter(student=obj)
         serializer = NestedStudentSponsorSerializer(queryset, many=True)
         return serializer.data
+
+    def get_allocated_amount(self, obj):
+        allocated_amount = get_student_allocated_amount(obj)
+        return allocated_amount
 
 
 class StudentSponsorSerializer(serializers.ModelSerializer):
@@ -83,6 +87,10 @@ class StudentSponsorSerializer(serializers.ModelSerializer):
             raise ValidationError(
                 "Sponsor does not have enough money to be a this student's sponsor!"
             )
+
+        if attrs.get("sponsor").status != "confirmed":
+            raise ValidationError("Invalid sponsor!")
+
         return attrs
 
 

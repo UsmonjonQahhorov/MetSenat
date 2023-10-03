@@ -14,7 +14,7 @@ from apps.sponsors.serializers import (
 class SponsorViewSet(ModelViewSet):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
-    permission_classes = [SponsorPermission]
+    # permission_classes = [SponsorPermission]
 
     # def get_permissions(self):
     #     if self.action == "create":
@@ -31,3 +31,7 @@ class SponsorViewSet(ModelViewSet):
         elif self.action == "retrieve":
             return SponsorDetailSerializer
         return self.serializer_class
+
+    def list(self, request, *args, **kwargs):
+        print("Hello from Sponsor list action!")
+        return super(SponsorViewSet, self).list(request, *args, **kwargs)
