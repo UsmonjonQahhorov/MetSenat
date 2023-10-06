@@ -6,7 +6,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 app = Celery("config")
 
-app.conf.broker_url = "redis://localhost:6379/0"
+app.conf.broker_url = "redis://metsetnat_redis:6379/0"
 app.conf.timezone = "Asia/Tashkent"
 app.config_from_object("django.conf:settings", namespace="CELERY")
 

@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from apps.sponsors.models import Sponsor
 from apps.sponsors.permissions import SponsorPermission
+from apps.sponsors.tasks import send_students_info
 from apps.sponsors.serializers import (
     SponsorSerializer,
     SponsorCreateSerializer,
@@ -34,4 +35,5 @@ class SponsorViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         print("Hello from Sponsor list action!")
+        send_students_info.delay()
         return super(SponsorViewSet, self).list(request, *args, **kwargs)
