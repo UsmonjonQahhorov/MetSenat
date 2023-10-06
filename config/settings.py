@@ -34,7 +34,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 DJANGO_APPS = [
@@ -103,10 +103,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'metsenat_dev_db',
-        'USER': 'metsenat_dev_user',
-        'PASSWORD': 'metsenat_dev_root',
-        'HOST': 'localhost',
+        'NAME': 'metsenat_db',
+        'USER': 'postgres',
+        'PASSWORD': '1',
+        'HOST': 'metsenat-db',
         'PORT': '5432',
     }
 }
