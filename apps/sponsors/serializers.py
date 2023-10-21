@@ -5,13 +5,21 @@ from rest_framework.exceptions import ValidationError
 
 
 class SponsorSerializer(serializers.ModelSerializer):
+    created_at = serializers.SerializerMethodField("get_created_at")
+    updated_at = serializers.SerializerMethodField("get_updated_at")
+
     class Meta:
         model = Sponsor
         fields = "__all__"
 
+        def get_created_at(self, obj):
+            return obj.created_at.strftime("%Y-%m-%d-%H:%M")
+
 
 class SponsorListSerializer(serializers.ModelSerializer):
     spent_amount = serializers.SerializerMethodField("get_spent_amount", read_only=True)
+    created_at = serializers.SerializerMethodField("get_created_at")
+    updated_at = serializers.SerializerMethodField("get_updated_at")
 
     class Meta:
         model = Sponsor
@@ -23,7 +31,12 @@ class SponsorListSerializer(serializers.ModelSerializer):
             "spent_amount",
             "created_at",
             "status",
+            "created_at",
+            "updated_at"
         ]
+
+    def get_created_at(self, obj):
+        return obj.created_at.strftime("%Y-%m-%d-%H:%M")
 
     def get_spent_amount(self, obj):
         return 0

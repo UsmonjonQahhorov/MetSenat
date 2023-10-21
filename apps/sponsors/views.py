@@ -9,6 +9,8 @@ from apps.sponsors.serializers import (
     SponsorListSerializer,
     SponsorDetailSerializer
 )
+
+
 # from rest_framework.permissions import IsAuthenticated, AllowAny
 
 

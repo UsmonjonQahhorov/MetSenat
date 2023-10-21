@@ -249,3 +249,6 @@ webpack-stats.json
 node_modules
 .idea/
 .env
+.gitignore
+http_ca.crt
+venv

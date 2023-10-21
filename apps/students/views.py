@@ -18,7 +18,7 @@ from rest_framework.mixins import (
 class StudentViewSet(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [StudentPermission]
+    # permission_classes = [StudentPermission]
 
     def get_serializer_class(self):
         if self.action == "list":

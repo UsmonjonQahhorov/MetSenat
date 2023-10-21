@@ -1,6 +1,6 @@
 # 1. Total students' allocated amount
 # 2. Total students' contract amount
-# 3. Contract amount that should be payed
+# 3. Contract amount that should be paid
 import datetime
 
 from django.db.models import Sum, Count
@@ -16,7 +16,7 @@ from apps.students.models import StudentSponsor, Student
 from rest_framework.viewsets import GenericViewSet
 
 
-class DashboardViewSet(GenericViewSet):
+class DashboardViewSetOne(GenericViewSet):
     @action(methods=["GET"], detail=False)
     def chart_one(self, request, *args, **kwargs):
         total_allocated_amount = StudentSponsor.objects.aggregate(
@@ -33,6 +33,8 @@ class DashboardViewSet(GenericViewSet):
         }
         return Response(data)
 
+
+class DashboardViewSetSecond(GenericViewSet):
     @action(methods=["GET"], detail=False)
     def chart_two(self, request, *args, **kwargs):
         students = {
@@ -43,11 +45,12 @@ class DashboardViewSet(GenericViewSet):
             ).order_by('date')
         }
         sponsors = {
-            s.get("date").strftime("%Y-%m-%d"): s.get("count") for s in Sponsor.objects.filter(status=SponsorStatus.CONFIRMED).annotate(
-            date=TruncDate('created_at')
-        ).values('date').annotate(
-            count=Count('id')
-        ).order_by('date')
+            s.get("date").strftime("%Y-%m-%d"): s.get("count") for s in
+            Sponsor.objects.filter(status=SponsorStatus.CONFIRMED).annotate(
+                date=TruncDate('created_at')
+            ).values('date').annotate(
+                count=Count('id')
+            ).order_by('date')
         }
 
         students = self.get_data_for_all_days(students)
@@ -66,4 +69,3 @@ class DashboardViewSet(GenericViewSet):
             if target_date.strftime("%Y-%m-%d") not in objects:
                 objects[target_date.strftime("%Y-%m-%d")] = 0
         return objects
-
