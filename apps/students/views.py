@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.response import Response
+from apps.students.documents import StudentDocument
 from apps.students.models import Student, StudentSponsor
 from apps.students.permissions import StudentPermission
 from apps.students.serializers import (
@@ -18,6 +20,7 @@ from rest_framework.mixins import (
 class StudentViewSet(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
     # permission_classes = [StudentPermission]
 
     def get_serializer_class(self):
@@ -42,4 +45,8 @@ class StudentSponsorViewSet(
             return StudentSponsorUpdateSerializer
         return StudentSponsorSerializer
 
-
+    def list(self, request, *args, **kwargs):
+        result_list = []
+        for information in StudentDocument.search():
+            result_list.append(information.full_name)
+        return Response(result_list)

@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': 'metsenat_db',
         'USER': 'postgres',
         'PASSWORD': '1',
-        'HOST': 'localhost',
+        'HOST': 'metsenat-db',
         'PORT': '5432',
     }
 }
